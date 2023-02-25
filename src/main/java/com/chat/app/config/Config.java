@@ -11,9 +11,9 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 public class Config implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        WebSocketMessageBrokerConfigurer.super.registerStompEndpoints(registry);
+//        WebSocketMessageBrokerConfigurer.super.registerStompEndpoints(registry);
         //this is for connectivity of the server for the url
-        registry.addEndpoint("/server1").withSockJS();
+        registry.addEndpoint("/server1").setAllowedOriginPatterns("*").withSockJS();
         //to connect with server we have /server1 url
         //to send message /app/message
         //to subscribe to that server so that we can recieve message /topic/return-to
@@ -21,7 +21,7 @@ public class Config implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        WebSocketMessageBrokerConfigurer.super.configureMessageBroker(registry);
+//        WebSocketMessageBrokerConfigurer.super.configureMessageBroker(registry);
         registry.enableSimpleBroker("/topic");//it enable prefix for broker with this url
         registry.setApplicationDestinationPrefixes("/app");//whenever someone will submit the msg with "/app" at start
         // app then message
